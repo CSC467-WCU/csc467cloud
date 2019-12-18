@@ -10,9 +10,7 @@ tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
-node = request.XenVM("head")
-node.cores = 8
-node.ram = 8192
+node = request.RawPC("head")
 node.routable_control_ip = "true" 
 node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
 node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh")) 
