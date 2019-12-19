@@ -64,10 +64,7 @@ for i in range(params.workerCount + 1):
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
   
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/environment_prep.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/environment_prep.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/environment_prep.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo yum install -y ambari-server"))
