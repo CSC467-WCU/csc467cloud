@@ -4,6 +4,7 @@ set -x
 
 sudo chown nobody:nogroup /opt
 sudo chmod -R a+rx /opt
+mkdir /opt/flagdir
 
 #################
 sudo apt-get update
