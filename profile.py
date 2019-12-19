@@ -45,10 +45,11 @@ link = request.LAN("lan")
 
 for i in range(params.workerCount + 1):
   if i == 0:
-    node = request.RawPC("namenode")
+    node = request.XenVM("namenode")
   else:
-    node = request.RawPC("datanode-" + str(i))
-
+    node = request.XenVM("datanode-" + str(i))
+  node.cores = 4
+  node.ram = 8192
   node.routable_control_ip = "true"
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   bs = node.Blockstore("bs" + str(i), "/hadoop")
