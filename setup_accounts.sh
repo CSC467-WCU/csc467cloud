@@ -25,4 +25,5 @@ if hostname | grep -q namenode; then
   
 #  sudo -H -u hdfs bash -c "wget -P /landing https://cs.wcupa.edu/lngo/data/airlines.tgz"
 #  sudo -H -u hdfs bash -c "cd /landing; tar xzf airlines.tgz"
+# https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh
 fi
