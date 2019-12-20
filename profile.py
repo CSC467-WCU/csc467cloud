@@ -65,14 +65,15 @@ for i in range(params.workerCount + 1):
   link.addInterface(iface)
   
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/environment_prep.sh"))
-  
+  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/setup_jupyter.sh"))
+
+    
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo yum install -y ambari-server"))
     node.addService(pg.Execute(shell="sh", command="sudo ambari-server setup -s"))
     node.addService(pg.Execute(shell="sh", command="sudo yum -y install mysql-connector-java*"))
     node.addService(pg.Execute(shell="sh", command="sudo ln -s /usr/share/java/mysql-connector-java.jar /var/lib/ambari-server/resources/mysql-connector-java.jar"))
     node.addService(pg.Execute(shell="sh", command="sudo ambari-server start"))
-    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/setup_jupyter.sh"))
     
   node.addService(pg.Execute(shell="sh", command="sudo yum install -y ambari-agent"))
   node.addService(pg.Execute(shell="sh", command="sudo sed -i 's/localhost/192.168.1.1/g' /etc/ambari-agent/conf/ambari-agent.ini"))
