@@ -53,7 +53,10 @@ for i in range(params.workerCount + 1):
   node.routable_control_ip = "true"
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   bs = node.Blockstore("bs" + str(i), "/hadoop")
-  bs.size = "100GB"
+  bs.size = "200GB"
+  
+  bs_opt = node.Blockstore("bs_opt" + str(i), "/opt")
+  bs.size = "10GB"
   
   if i == 0:
     bs_landing = node.Blockstore("bs_landing", "/landing")
