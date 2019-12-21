@@ -58,7 +58,7 @@ for i in range(params.workerCount + 1):
   bs_opt = node.Blockstore("bs_opt" + str(i), "/opt")
   bs_opt.size = "10GB"
   
-  bs_hdp = node.Blockstore("bs_opt" + str(i), "/usr/hdp")
+  bs_hdp = node.Blockstore("bs_hdp" + str(i), "/usr/hdp")
   bs_hdp.size = "50GB"
   
   if i == 0:
