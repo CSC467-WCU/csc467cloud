@@ -48,19 +48,22 @@ for i in range(params.workerCount + 1):
     node = request.XenVM("namenode")
   else:
     node = request.XenVM("datanode-" + str(i))
-  node.cores = 4
-  node.ram = 8192
+  node.cores = 6
+  node.ram = 16384
   node.routable_control_ip = "true"
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   bs = node.Blockstore("bs" + str(i), "/hadoop")
-  bs.size = "200GB"
+  bs.size = "100GB"
   
   bs_opt = node.Blockstore("bs_opt" + str(i), "/opt")
-  bs.size = "10GB"
+  bs_opt.size = "10GB"
+  
+  bs_hdp = node.Blockstore("bs_opt" + str(i), "/usr/hdp")
+  bs_hdp.size = "50GB"
   
   if i == 0:
     bs_landing = node.Blockstore("bs_landing", "/landing")
-    bs_landing.size = "500GB"
+    bs_landing.size = "300GB"
     
   iface = node.addInterface("if" + str(i-3))
   iface.component_id = "eth1"
