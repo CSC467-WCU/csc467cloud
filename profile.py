@@ -48,8 +48,8 @@ for i in range(params.workerCount + 1):
     node = request.XenVM("namenode")
   else:
     node = request.XenVM("datanode-" + str(i))
-  node.cores = 6
-  node.ram = 16384
+  node.cores = 4
+  node.ram = 8192
   node.routable_control_ip = "true"
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   bs = node.Blockstore("bs" + str(i), "/hadoop")
