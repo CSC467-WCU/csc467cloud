@@ -8,7 +8,6 @@ for dir in scratch software; do
   sudo chmod 755 /$dir
 done
 
-
 sudo systemctl enable rpcbind
 sudo systemctl enable nfs-server
 sudo systemctl enable nfs-lock
