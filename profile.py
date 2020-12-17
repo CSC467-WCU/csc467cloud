@@ -33,15 +33,15 @@ rspec.addResource( lan )
 for i in range(params.n):
   if i == 0:
     node = Node("namenode", True)
-    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh"))
+    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh"))
   else:
     node = Node("datanode-" + str(i), False)
-    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
+    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
 
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   iface = node.addInterface("if" + str(i))
   iface.component_id = "eth1"
-  iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
+  iface.addAddress(RSpec.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
   rspec.addResource( node )
 
