@@ -2,7 +2,7 @@
 
 while [ ! -d /software/hadoop_done ]
 do
-  sleep 60
+  sleep 10
 done
 
 export JAVA_HOME="/software/jdk8u275-b01/"
