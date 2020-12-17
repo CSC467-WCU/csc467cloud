@@ -52,5 +52,6 @@ sudo echo $NAMENODE > ${HADOOP_CONF_DIR}/master
 sudo touch ${HADOOP_CONF_DIR}/workers
 
 time ${HADOOP_HOME}/bin/hdfs --config ${HADOOP_CONF_DIR} namenode -format -force
-time ${HADOOP_HOME}/sbin/hadoop-daemon.sh --config ${HADOOP_CONF_DIR} start namenode
-time ${HADOOP_HOME}/sbin/yarn-daemon.sh --config ${HADOOP_CONF_DIR} start resourcemanager
+time ${HADOOP_HOME}/bin/hdfs --config ${HADOOP_CONF_DIR} --daemon start namenode
+time ${HADOOP_HOME}/bin/yarn --config ${HADOOP_CONF_DIR} --daemon start resourcemanager
+time ${HADOOP_HOME}/bin/mapred --daemon start historyserver
