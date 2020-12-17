@@ -9,6 +9,8 @@ DATANODE=`hostname --all-ip-addresses | awk '{print $2}'`
 
 echo $DATANODE >> ${HADOOP_CONF_DIR}/workers
 
-time ${HADOOP_HOME}/sbin/hadoop-daemons.sh --config ${HADOOP_CONF_DIR} start datanode
-time ${HADOOP_HOME}/sbin/yarn-daemons.sh --config ${HADOOP_CONF_DIR} start nodemanager
+#time ${HADOOP_HOME}/sbin/hadoop-daemons.sh --config ${HADOOP_CONF_DIR} start datanode
+$HADOOP_HOME/bin/hdfs --config ${HADOOP_CONF_DIR} --daemon start datanode
+$HADOOP_HOME/bin/yarn --config ${HADOOP_CONF_DIR} --daemon start nodemanager
+#time ${HADOOP_HOME}/sbin/yarn-daemons.sh --config ${HADOOP_CONF_DIR} start nodemanager
 
