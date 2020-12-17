@@ -31,6 +31,8 @@ sudo sed -i 's:HADOOP_TMP_DIR:'"$HADOOP_TMP_DIR"':g' $HADOOP_CONF_DIR/core-site.
 # hadoop-env.sh
 sudo echo "" > $HADOOP_CONF_DIR/hadoop-env.sh
 sudo echo "export HADOOP_LOG_DIR=$HADOOP_LOG_DIR" >> $HADOOP_CONF_DIR/hadoop-env.sh
+sudo echo "export JAVA_HOME=/software/jdk8u275-b01/" >> $HADOOP_CONF_DIR/hadoop-env.sh
+
 
 # hdfs-site.xml
 sudo sed -i 's:HADOOP_DATA_DIR:'"$HADOOP_DATA_DIR"':g' ${HADOOP_CONF_DIR}/hdfs-site.xml
