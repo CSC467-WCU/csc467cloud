@@ -20,6 +20,7 @@ sudo systemctl start nfs-idmap
 for dir in scratch software; do
   for i in {2..$1}; do
     echo "$dir 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+  done
 done
 
 sudo systemctl restart nfs-server
