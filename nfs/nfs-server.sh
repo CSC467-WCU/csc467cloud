@@ -18,7 +18,8 @@ sudo systemctl start nfs-lock
 sudo systemctl start nfs-idmap
 
 for dir in scratch software; do
-  for i in {2..$1}; do
+  for (( i=2; i<=$1; i++ ))
+  do
     echo "$dir 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
   done
 done
