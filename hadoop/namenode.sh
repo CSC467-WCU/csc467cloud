@@ -21,7 +21,8 @@ export HADOOP_TMP_DIR="/hadoop/hadoop/tmp"
 export YARN_LOCAL_DIR="/hadoop/yarn/data"
 export YARN_LOG_DIR="/hadoop/yarn/logs"
 
-NAMENODE=`hostname -f`
+#NAMENODE=`hostname -f`
+NAMENODE='192.168.1.1'
 
 # core-site.xml
 sudo sed -i 's:NAMENODE:'"$NAMENODE"':g' ${HADOOP_CONF_DIR}/core-site.xml
