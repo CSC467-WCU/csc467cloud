@@ -55,3 +55,5 @@ time ${HADOOP_HOME}/bin/hdfs --config ${HADOOP_CONF_DIR} namenode -format -force
 time ${HADOOP_HOME}/bin/hdfs --config ${HADOOP_CONF_DIR} --daemon start namenode
 time ${HADOOP_HOME}/bin/yarn --config ${HADOOP_CONF_DIR} --daemon start resourcemanager
 time ${HADOOP_HOME}/bin/mapred --daemon start historyserver
+
+sudo mkdir /software/hadoop_done
