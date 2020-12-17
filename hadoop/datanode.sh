@@ -1,10 +1,14 @@
 #!/bin/bash
 
+while [ ! -d /software/hadoop_done ]
+do
+  sleep 60
+done
+
 export JAVA_HOME="/software/jdk8u275-b01/"
 export HADOOP_HOME="/software/hadoop-3.3.0"
 export HADOOP_CONF_DIR="/software/hadoop/config"
 
-#DATANODE=`hostname -f`
 DATANODE=`hostname --all-ip-addresses | awk '{print $2}'`
 
 echo $DATANODE >> ${HADOOP_CONF_DIR}/workers
