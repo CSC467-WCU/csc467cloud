@@ -15,10 +15,7 @@ pc.defineParameter( "mem", "Memory per VM",
 
 params = pc.bindParameters()
 
-IMAGE = "urn:publicid:IDN+emulab.net+image+emulab-ops//hadoop-273"
-SETUP = "http://www.emulab.net/downloads/hadoop-2.7.3-setup.tar.gz"
-
-def Node( name, public ):
+def Node(name, public):
     if params.raw:
         return RSpec.RawPC( name )
     else:
@@ -33,45 +30,25 @@ rspec = RSpec.Request()
 lan = RSpec.LAN()
 rspec.addResource( lan )
 
-node = Node( "namenode", True )
-node.disk_image = IMAGE
-node.addService( RSpec.Install( SETUP, "/tmp" ) )
-node.addService( RSpec.Execute( "sh", "sudo /tmp/setup/hadoop-setup.sh" ) )
-node.addService( RSpec.Execute( "sh", "sudo bash /local/repository/setup_hadoop.sh"))
-node.addService( RSpec.Execute( "sh", "sudo bash /local/repository/create_account.sh"))
+for i in range(params.n):
+  if i == 0:
+    node = Node(namenode, True)
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh"))
+  else:
+    node = Node("datanode-" + str(i), False)
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
 
-iface = node.addInterface( "if0" )
-lan.addInterface( iface )
-rspec.addResource( node )
-
-node = Node( "resourcemanager", True )
-node.disk_image = IMAGE
-node.addService( RSpec.Install( SETUP, "/tmp" ) )
-node.addService( RSpec.Execute( "sh", "sudo /tmp/setup/hadoop-setup.sh" ) )
-node.addService( RSpec.Execute( "sh", "sudo bash /local/repository/setup_hadoop.sh"))
-
-iface = node.addInterface( "if0" )
-lan.addInterface( iface )
-rspec.addResource( node )
-
-for i in range( params.n ):
-    node = Node( "worker-" + str( i ), False )
-    node.disk_image = IMAGE
-    node.addService( RSpec.Install( SETUP, "/tmp" ) )
-    node.addService( RSpec.Execute( "sh", "sudo /tmp/setup/hadoop-setup.sh" ) )
-    node.addService( RSpec.Execute( "sh", "sudo bash /local/repository/setup_hadoop.sh"))
-    #node.addService(rspec.Execute(  "sh", "sudo /usr/local/hadoop-2.7.3/bin/hdfs --daemon start datanode"))
-    #node.addService(rspec.Execute(  "sh", "sudo /usr/local/hadoop-2.7.3/bin/hdfs --daemon start nodemanager"))
-
-    iface = node.addInterface( "if0" )
-    lan.addInterface( iface )
-    rspec.addResource( node )
+  node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
+  iface = node.addInterface("if" + str(i))
+  iface.component_id = "eth1"
+  iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
+  link.addInterface(iface)
+  rspec.addResource( node )
 
 from lxml import etree as ET
-
 tour = geni.rspec.igext.Tour()
 tour.Description( geni.rspec.igext.Tour.TEXT, "A cluster running Hadoop 2.7.3. It includes a name node, a resource manager, and as many workers as you choose." )
-tour.Instructions( geni.rspec.igext.Tour.MARKDOWN, "After your instance boots (approx. 5-10 minutes), you can log into the resource manager node and submit jobs.  [The HDFS web UI](http://{host-namenode}:50070/) and [the resource manager UI](http://{host-resourcemanager}:8088/) will also become available." )
+tour.Instructions( geni.rspec.igext.Tour.MARKDOWN, "After your instance boots (approx. 5-10 minutes), you can log into the resource manager node and submit jobs.  [The HDFS web UI](http://{host-namenode}:50070/) and [the resource manager UI](http://{host-namenode}:8088/) will also become available." )
 rspec.addTour( tour )
 
 pc.printRequestRSpec( rspec )
