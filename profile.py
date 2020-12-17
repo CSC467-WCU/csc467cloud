@@ -34,8 +34,8 @@ prefixForIP="192.168.1."
 for i in range(params.n):
   if i == 0:
     node = Node("namenode", True)
-    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh"))
-    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/hadoop/namenode.sh"))
+    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh" + str(params.n)))
+    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/hadoop/namenode.sh" + str(params.n)))
   else:
     node = Node("datanode-" + str(i), False)
     node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
