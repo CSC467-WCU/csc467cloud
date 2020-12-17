@@ -39,6 +39,7 @@ for i in range(params.n):
   else:
     node = Node("datanode-" + str(i), False)
     node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
+    node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/hadoop/datanode.sh"))
   bs = node.Blockstore("bs" + str(i), "/hadoop")
   bs.size = "500GB"
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
