@@ -32,7 +32,7 @@ rspec.addResource( lan )
 
 for i in range(params.n):
   if i == 0:
-    node = Node(namenode, True)
+    node = Node("namenode", True)
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh"))
   else:
     node = Node("datanode-" + str(i), False)
