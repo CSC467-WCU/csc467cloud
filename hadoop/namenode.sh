@@ -50,10 +50,6 @@ sudo sed -i 's:YARN_LOG_DIR:'"$YARN_LOG_DIR"':g' ${HADOOP_CONF_DIR}/yarn-site.xm
 #components
 sudo echo $NAMENODE > ${HADOOP_CONF_DIR}/master
 sudo touch ${HADOOP_CONF_DIR}/workers
-for (( i=2; i<=$1; i++ ))
-do
-  sudo echo "192.168.1.$i" >> workers
-done
 
 time ${HADOOP_HOME}/bin/hdfs --config ${HADOOP_CONF_DIR} namenode -format -force
 time ${HADOOP_HOME}/sbin/hadoop-daemon.sh --config ${HADOOP_CONF_DIR} start namenode
