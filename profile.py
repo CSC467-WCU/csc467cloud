@@ -38,7 +38,8 @@ for i in range(params.n):
   else:
     node = Node("datanode-" + str(i), False)
     node.addService(RSpec.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
-
+  bs = node.Blockstore("bs" + str(i), "/hadoop")
+  bs.size = "500GB"
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   iface = node.addInterface("if" + str(i))
   iface.component_id = "eth1"
