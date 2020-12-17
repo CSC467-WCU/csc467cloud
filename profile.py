@@ -4,14 +4,14 @@ import geni.rspec.igext
 
 pc = portal.Context()
 
-pc.defineParameter( "n", "Number of worker nodes",
+pc.defineParameter( "n", "Number of nodes",
 		    portal.ParameterType.INTEGER, 3 )
 
 pc.defineParameter( "raw", "Use physical nodes",
                     portal.ParameterType.BOOLEAN, False )
 
 pc.defineParameter( "mem", "Memory per VM",
-		    portal.ParameterType.INTEGER, 256 )
+		    portal.ParameterType.INTEGER, 64 )
 
 params = pc.bindParameters()
 
