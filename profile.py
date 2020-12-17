@@ -29,6 +29,7 @@ rspec = RSpec.Request()
 
 lan = RSpec.LAN()
 rspec.addResource( lan )
+prefixForIP="192.168.1."
 
 for i in range(params.n):
   if i == 0:
