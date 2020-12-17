@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo rm -Rf /software/hadoop*
+sudo rm -Rf /software/jdk*
+
 sudo wget https://www.cs.wcupa.edu/lngo/data/hadoop-3.3.0.tar.gz
 sudo tar xzf hadoop-3.3.0.tar.gz -C /software 
 
@@ -18,7 +21,7 @@ export HADOOP_TMP_DIR="/hadoop/hadoop/tmp"
 export YARN_LOCAL_DIR="/hadoop/yarn/data"
 export YARN_LOG_DIR="/hadoop/yarn/logs"
 
-NAMENODE="192.168.1.1"
+NAMENODE=`hostname -f`
 
 # core-site.xml
 sudo sed -i 's:NAMENODE:'"$NAMENODE"':g' ${HADOOP_CONF_DIR}/core-site.xml
