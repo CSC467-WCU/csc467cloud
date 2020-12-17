@@ -43,7 +43,7 @@ for i in range(params.n):
   iface = node.addInterface("if" + str(i))
   iface.component_id = "eth1"
   iface.addAddress(RSpec.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
-  link.addInterface(iface)
+  lan.addInterface(iface)
   rspec.addResource( node )
 
 from lxml import etree as ET
