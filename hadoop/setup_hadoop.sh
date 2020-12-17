@@ -3,8 +3,12 @@
 sudo wget https://www.cs.wcupa.edu/lngo/data/hadoop-3.3.0.tar.gz
 sudo tar xzf hadoop-3.3.0.tar.gz -C /software 
 
+sudo wget https://www.cs.wcupa.edu/lngo/data/OpenJDK8U-jdk_x64_linux_hotspot_8u275b01.tar.gz
+sudo tar xzf OpenJDK8U-jdk_x64_linux_hotspot_8u275b01.tar.gz -C /software
+
 sudo cp -R /local/repository/hadoop /software/
 
+export JAVA_HOME="/software/jdk8u275-b01/"
 export HADOOP_HOME="/software/hadoop-3.3.0"
 export HADOOP_CONF_DIR="/software/hadoop/config"
 export YARN_CONF_DIR="/software/hadoop/config"
